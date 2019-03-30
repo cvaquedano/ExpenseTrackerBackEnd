@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 
-const category = require('./category-query')
+const category = require('./queries/category-query')
 
 app.use(bodyParser.json())
 app.use(
