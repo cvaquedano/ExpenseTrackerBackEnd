@@ -8,7 +8,7 @@ const pool = new Pool({
 })
 
 const getTransaction = (request, response) => {
-    pool.query('SELECT * FROM transaction ORDER BY transactionId ASC', (error, results) => {
+    pool.query('SELECT * FROM transaction ORDER BY Id ASC', (error, results) => {
       if (error) {
         console.log(error.message)
         response.status(500).send(error.message)
@@ -20,7 +20,7 @@ const getTransaction = (request, response) => {
   const getTransactionById = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('SELECT * FROM transaction WHERE transactionid = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM transaction WHERE id = $1', [id], (error, results) => {
       if (error) {
         console.log(error.message)
         response.status(500).send(error.message)
@@ -46,7 +46,7 @@ const getTransaction = (request, response) => {
     const { description, categoryid, amount, date } = request.body
   
     pool.query(
-      'UPDATE transaction SET description = $1, categoryid = $2, amount=$3, date=$4 WHERE transactionId = $5 RETURNING *',
+      'UPDATE transaction SET description = $1, categoryid = $2, amount=$3, date=$4 WHERE Id = $5 RETURNING *',
       [description, categoryid, amount, date, id],
       (error, results) => {
         if (error) {
@@ -61,7 +61,7 @@ const getTransaction = (request, response) => {
   const deleteTransaction = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('DELETE FROM transaction WHERE transactionId = $1', [id], (error, results) => {
+    pool.query('DELETE FROM transaction WHERE Id = $1', [id], (error, results) => {
       if (error) {
         console.log(error.message)
           response.status(500).send(error.message)

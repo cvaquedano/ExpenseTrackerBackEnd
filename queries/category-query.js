@@ -8,7 +8,7 @@ const pool = new Pool({
 })
 
 const getCategories = (request, response) => {
-    pool.query('SELECT * FROM category ORDER BY categoryid ASC', (error, results) => {
+    pool.query('SELECT * FROM category ORDER BY id ASC', (error, results) => {
       if (error) {
         console.log(error.message)
         response.status(500).send(error.message)
@@ -20,7 +20,7 @@ const getCategories = (request, response) => {
   const getCategoryById = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('SELECT * FROM category WHERE categoryid = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM category WHERE id = $1', [id], (error, results) => {
       if (error) {
         console.log(error.message)
         response.status(500).send(error.message)
@@ -46,7 +46,7 @@ const getCategories = (request, response) => {
     const { name, description, type,budget } = request.body
   
     pool.query(
-      'UPDATE category SET name = $1, description = $2, type=$3, budget=$4 WHERE categoryid = $5 RETURNING *',
+      'UPDATE category SET name = $1, description = $2, type=$3, budget=$4 WHERE id = $5 RETURNING *',
       [name, description, type, budget, id],
       (error, results) => {
         if (error) {
@@ -61,7 +61,7 @@ const getCategories = (request, response) => {
   const deleteCategory = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('DELETE FROM category WHERE categoryid = $1', [id], (error, results) => {
+    pool.query('DELETE FROM category WHERE id = $1', [id], (error, results) => {
       if (error) {
         console.log(error.message)
           response.status(500).send(error.message)
