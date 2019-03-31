@@ -8,7 +8,7 @@ const pool = new Pool({
 })
 
 const getTransaction = (request, response) => {
-    pool.query('SELECT * FROM transaction ORDER BY Id ASC', (error, results) => {
+    pool.query('select t.*,c.name as categoryname from transaction t inner join category c on t.categoryid=c.id  ORDER BY t.Id ASC', (error, results) => {
       if (error) {
         console.log(error.message)
         response.status(500).send(error.message)
@@ -20,7 +20,7 @@ const getTransaction = (request, response) => {
   const getTransactionById = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('SELECT * FROM transaction WHERE id = $1', [id], (error, results) => {
+    pool.query('select t.*,c.name as categoryname from transaction t inner join category c on t.categoryid=c.id  WHERE t.id = $1', [id], (error, results) => {
       if (error) {
         console.log(error.message)
         response.status(500).send(error.message)

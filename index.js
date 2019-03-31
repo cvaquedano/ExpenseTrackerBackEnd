@@ -5,6 +5,8 @@ const port = 3000
 
 const category = require('./queries/category-query')
 const transaction = require('./queries/transaction-query')
+ const notification = require('./queries/notification-query')
+const balance = require('./queries/balance-query')
 
 app.use(bodyParser.json())
 app.use(
@@ -52,3 +54,7 @@ app.get('/transaction/:id', transaction.getTransactionById)
 app.post('/transaction', transaction.createTransaction)
 app.put('/transaction/:id', transaction.updateTransaction)
 app.delete('/transaction/:id', transaction.deleteTransaction)
+
+app.get('/notification', notification.getNotification)
+
+ app.get('/balance/:id', balance.getBalanceByMonth)
