@@ -3,7 +3,7 @@ var db = require('./pgpool.js');
 var pool = db.getPool();
 
 const getTransaction = (request, response) => {
-    pool.query('select t.*,c.name as categoryname from transaction t inner join category c on t.categoryid=c.id  ORDER BY t.Id ASC', (error, results) => {
+    pool.query('select t.*,c.name as categoryname from transaction t inner join category c on t.categoryid=c.id  ORDER BY t.date, t.Id ASC', (error, results) => {
       if (error) {
         console.log(error.message)
         response.status(500).send(error.message)
