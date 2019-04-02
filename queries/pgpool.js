@@ -11,7 +11,7 @@ var config = {
 
 module.exports = {
     getPool: function () {
-      if (pool) return pool; // if it is already there, grab it here
+      if (pool) return pool; 
       pool = new pg.Pool(config);
       return pool;
 }
