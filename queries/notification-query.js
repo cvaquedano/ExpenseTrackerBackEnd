@@ -1,11 +1,6 @@
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'ExpenseTracker',
-  password: 'chvb',
-  port: 5432,
-})
+
+var db = require('./pgpool.js');
+var pool = db.getPool();
 
 const getNotification = (request, response) => {
     pool.query('select * from notifications', (error, results) => {
