@@ -4,7 +4,8 @@
   "description": "Expense Tracker BackEnd",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "cvaquedano",
@@ -12,5 +13,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "pg": "^7.9.0"
-  }
+  },
+  "bundledDependencies": [
+    "express"
+  ]
 }
